@@ -10,11 +10,17 @@
     <div style="position: relative; display: inline-block;">
         <div style="position: absolute; display: flex; width: 100%; align-items: center; padding: 20px;">
             <!-- player health -->
-            <div style="background-color: yellow; height: 30px; width: 100%"></div>
+            <div style="position: relative; height: 30px; width: 100%; display: flex; justify-content: flex-end;">
+                <div style="background-color: yellow; height: 100%; width: 100%;"></div>
+                <div id="playerHealthBar" style="background-color: blue; position: absolute; top:0; right: 0; bottom: 0; width: 100%;"></div>
+            </div>
             <!-- timer -->
             <div style="background-color: red; height: 100px; width: 100px; flex-shrink: 0;"></div>
             <!-- enemy health -->
-            <div style="background-color: yellow; height: 30px; width: 100%"></div>
+            <div style="position: relative; height: 30px; width: 100%">
+                <div style="background-color: yellow; height: 100%; width: 100%;"></div>
+                <div id="enemyHealthBar" style="background-color: blue; position: absolute; top:0; left:0; right: 0; bottom: 0;"></div>
+            </div>
         </div>
         <canvas></canvas>
     </div>

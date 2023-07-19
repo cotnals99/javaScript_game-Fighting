@@ -25,6 +25,7 @@ class Sprite {
       offset: offset,
     };
     this.isAttacking;
+    this.health = 100;
   }
 
   draw() {
@@ -161,6 +162,8 @@ function animate() {
     player.isAttacking
   ) {
     player.isAttacking = false;
+    enemy.health -= 20
+    document.querySelector('#enemyHealthBar').style.width = enemy.health + '%'
     console.log("Player Hit");
   }
 
@@ -173,7 +176,9 @@ function animate() {
     enemy.isAttacking
   ) {
     enemy.isAttacking = false;
-    console.log("Enemy Hit");
+    player.health -= 20
+    document.querySelector('#playerHealthBar').style.width = player.health + '%'
+    console.log("Player Hit");
   }
 }
 
