@@ -28,12 +28,12 @@ const shop = new Sprite({
 
 const player = new Fighter({
   position: {
-    x: 100,
+    x: 0,
     y: 0,
   },
   velocity: {
     x: 0,
-    y: 10,
+    y: 0,
   },
   // color: "blue",
   offset: {
@@ -79,10 +79,10 @@ const player = new Fighter({
   },
   attackBox: {
     offset: {
-      x: 80,
+      x: 100,
       y: 50
     },
-    width: 180,
+    width: 160,
     height: 50
   }
 });
