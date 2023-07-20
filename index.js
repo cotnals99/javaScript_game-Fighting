@@ -9,37 +9,61 @@ c.fillRect(0, 0, canvas.width, canvas.height);
 const gravity = 0.7;
 
 const background = new Sprite({
- position: {
-  x: 0,
-  y: 0
- },
- imageSrc: './img/background.png'
-})
+  position: {
+    x: 0,
+    y: 0,
+  },
+  imageSrc: "./img/background.png",
+});
 
 const shop = new Sprite({
   position: {
-    x: 650,
-    y: 224
+    x: 600,
+    y: 128,
   },
-  imageSrc: './img/shop.png',
-  scale: 2,
-  framesMax: 6
-})
-
+  imageSrc: "./img/shop.png",
+  scale: 2.75,
+  framesMax: 6,
+});
 
 const player = new Fighter({
   position: {
-    x: 0,
+    x: 100,
     y: 0,
   },
   velocity: {
     x: 0,
     y: 10,
   },
-  color: "blue",
+  // color: "blue",
   offset: {
     x: 0,
     y: 0,
+  },
+  imageSrc: "./img/samuraiMack/Idle.png",
+  scale: 2.5,
+  framesMax: 8,
+  offset: {
+    x: 215,
+    y: 157,
+  },
+  sprites: {
+    idle: {
+      imageSrc: "./img/samuraiMack/Idle.png",
+      framesMax: 8,
+    },
+    run: {
+      imageSrc: "./img/samuraiMack/Run.png",
+      framesMax: 8,
+    },
+    jump: {
+      imageSrc: "./img/samuraiMack/Jump.png",
+      framesMax: 2,
+    },
+    fall: {
+      imageSrc: "./img/samuraiMack/Fall.png",
+      framesMax: 2,
+    },
   },
 });
 
@@ -56,6 +80,13 @@ const enemy = new Fighter({
   offset: {
     x: -50,
     y: 0,
+  },
+  imageSrc: "./img/kenji/Idle.png",
+  scale: 2.5,
+  framesMax: 4,
+  offset: {
+    x: 215,
+    y: 167,
   },
 });
 
@@ -90,15 +121,22 @@ function animate() {
   background.update();
   shop.update();
   player.update();
-  enemy.update();
+  // enemy.update();
 
   player.velocity.x = 0;
   enemy.velocity.x = 0;
 
   //player movement
-  if (keys.KeyA.pressed && player.lastKey === "KeyA") player.velocity.x = -5;
-  else if (keys.KeyD.pressed && player.lastKey === "KeyD")
+  if (keys.KeyA.pressed && player.lastKey === "KeyA") {
+    player.velocity.x = -5;
+    player.switchSprite("run");
+  } else if (keys.KeyD.pressed && player.lastKey === "KeyD") {
     player.velocity.x = 5;
+    player.switchSprite("run");
+  } else player.switchSprite("idle");
+  if (player.velocity.y < 0) {
+    player.switchSprite("jump");
+  } else if (player.velocity.y > 0) player.switchSprite("fall");
 
   //enemy movement
   if (keys.ArrowLeft.pressed && enemy.lastKey === "ArrowLeft")
@@ -136,8 +174,8 @@ function animate() {
   }
 
   //Determine Winner when it is over
-  if (player.health <= 0 || enemy.health <= 0){
-    determineWinner({player, enemy, timerId})
+  if (player.health <= 0 || enemy.health <= 0) {
+    determineWinner({ player, enemy, timerId });
   }
 }
 
