@@ -178,6 +178,10 @@ function animate() {
 
   background.update();
   shop.update();
+  //Overlay
+  c.fillStyle = 'rgba(255, 255, 255, 0.15)'
+  c.fillRect(0, 0, canvas.width, canvas.height)
+
   player.update();
   enemy.update();
 
@@ -221,7 +225,11 @@ function animate() {
     player.isAttacking = false;
 
     enemy.takeHit()
-    document.querySelector("#enemyHealthBar").style.width = enemy.health + "%";
+
+    gsap.to('#enemyHealth', {
+      width: enemy.health + '%'
+    })
+    // document.querySelector("#enemyHealthBar").style.width = enemy.health + "%";
     // console.log("Player Hit");
   }
 
@@ -240,8 +248,12 @@ function animate() {
   ) {
     player.takeHit()
     enemy.isAttacking = false;
-    document.querySelector("#playerHealthBar").style.width =
-      player.health + "%";
+
+    gsap.to('#playerHealth', {
+      width: player.health + '%'
+    })
+    // document.querySelector("#playerHealthBar").style.width =
+    //   player.health + "%";
     // console.log("Player Hit");
   }
 
